@@ -4,13 +4,20 @@ from PyQt5.QtCore import QTimer
 from PyQt5.QtGui import QColor, QPainter, QLinearGradient, QIcon
 from PyQt5.QtWidgets import QMainWindow, QPushButton, QVBoxLayout, QWidget, QApplication, QHBoxLayout
 
+import Cancion
+
 
 class Interfaz(QMainWindow):
     temaInterfaz = 0
     color = 0  # esto permite poner un numero random para poner un color rgb como fondo :v
 
+
+
     def __init__(self):
         super().__init__()
+
+        self.reproduciendo = False
+        self.playAndPause = QPushButton()
 
         x = 625
         y = 350
@@ -27,15 +34,27 @@ class Interfaz(QMainWindow):
 
         # aca poner todos los widgets q quiera
 
-        play = QPushButton(">")
-        pause = QPushButton("||")
-        stop = QPushButton("#")
         tema = QPushButton("Tema")
-
         tema.clicked.connect(self.cambiarTema)
 
-        widgets = [play, pause,stop, tema]
+        stop = QPushButton("#")
+
+        self.playAndPause = QPushButton(">")
+
+        self.playAndPause.clicked.connect(self.reproducir)
+        widgets = [self.playAndPause,stop,tema]
+
         self.mostrarWidgets(widgets)
+
+    def reproducir(self):
+        if self.reproduciendo:
+            self.playAndPause.setText(">")
+            self.reproduciendo = False
+        else:
+            self.playAndPause.setText("||")
+            self.reproduciendo = True
+        self.update()
+
 
     def mostrarWidgets(self, widgets):
         central = QWidget(self)
@@ -77,6 +96,7 @@ class Interfaz(QMainWindow):
                 x = 0.25 * p
                 y = min(255, int((x * 100) + 10))
                 gradiente.setColorAt(x, QColor(y, y, y))
+
         elif self.temaInterfaz == 1:
             for p in range(5):
                 x = 0.25 * p
@@ -104,3 +124,6 @@ class Interfaz(QMainWindow):
         self.temaInterfaz = (self.temaInterfaz + 1) % 3
         self.color = random.randint(1, 3)
         self.update()
+
+    def subirCancion(self):
+        cancion = Cancion.Cancion.__init__("Songs\180.mp3")
