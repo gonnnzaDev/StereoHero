@@ -1,17 +1,13 @@
-import random
 
 from PyQt5.QtCore import QTimer
-from PyQt5.QtGui import QColor, QPainter, QLinearGradient, QIcon
-from PyQt5.QtWidgets import QMainWindow, QPushButton, QVBoxLayout, QWidget, QApplication, QHBoxLayout
+from PyQt5.QtGui import QColor, QPainter, QLinearGradient, QIcon, QImage
+from PyQt5.QtMultimedia import QMediaPlayerControl
+from PyQt5.QtWidgets import QMainWindow, QPushButton, QVBoxLayout, QWidget, QApplication, QHBoxLayout, QLabel
 
-import Cancion
 
 
 class Interfaz(QMainWindow):
-    temaInterfaz = 0
-    color = 0  # esto permite poner un numero random para poner un color rgb como fondo :v
-
-
+    temaInterfaz = False
 
     def __init__(self):
         super().__init__()
@@ -28,7 +24,7 @@ class Interfaz(QMainWindow):
         self.setGeometry(100, 100, x, y)
         self.cargarWidgets()
         self.fondoEnMovimiento()
-        self.setWindowIcon(QIcon("resources\icon.jpg"))
+        self.setWindowIcon(QIcon("resources/icon.png"))
 
     def cargarWidgets(self):
 
@@ -37,12 +33,13 @@ class Interfaz(QMainWindow):
         tema = QPushButton("Tema")
         tema.clicked.connect(self.cambiarTema)
 
-        stop = QPushButton("#")
+        stop = QPushButton("#") ## Hacer un metodo q saque la cancion al toque
 
         self.playAndPause = QPushButton(">")
 
         self.playAndPause.clicked.connect(self.reproducir)
-        widgets = [self.playAndPause,stop,tema]
+
+        widgets = [self.playAndPause, stop, tema]
 
         self.mostrarWidgets(widgets)
 
@@ -54,7 +51,6 @@ class Interfaz(QMainWindow):
             self.playAndPause.setText("||")
             self.reproduciendo = True
         self.update()
-
 
     def mostrarWidgets(self, widgets):
         central = QWidget(self)
@@ -91,39 +87,31 @@ class Interfaz(QMainWindow):
             self.offset + self.width(), self.offset + self.height()
         )
 
-        if self.temaInterfaz == 0:
+        if self.temaInterfaz:
             for p in range(5):
                 x = 0.25 * p
                 y = min(255, int((x * 100) + 10))
                 gradiente.setColorAt(x, QColor(y, y, y))
 
-        elif self.temaInterfaz == 1:
+        else:
             for p in range(5):
                 x = 0.25 * p
                 y = min(255, int((x * 100) + 100))
                 gradiente.setColorAt(x, QColor(y, y, y))
 
-        elif self.temaInterfaz == 2:
-            intensidad = 180
-
-            if self.color == 1:  # rojo
-                c1 = QColor(255, 80, 80)
-                c2 = QColor(intensidad, 0, 0)
-            elif self.color == 2:  # azul
-                c1 = QColor(80, 80, 255)
-                c2 = QColor(0, 0, intensidad)
-            else:  # verde
-                c1 = QColor(0, intensidad, 0)
-                c2 = QColor(80, 255, 80)
-
-            gradiente.setColorAt(0.0, c1)
-            gradiente.setColorAt(1.0, c2)
         painter.fillRect(self.rect(), gradiente)
 
     def cambiarTema(self):
-        self.temaInterfaz = (self.temaInterfaz + 1) % 3
-        self.color = random.randint(1, 3)
-        self.update()
+        if self.temaInterfaz:
+            self.temaInterfaz = False
+        else:
+            self.temaInterfaz = True
 
-    def subirCancion(self):
-        cancion = Cancion.Cancion.__init__("Songs\180.mp3")
+    def lineaDeTiempo(self):
+        return 0 # hacer linea de tiempo
+
+    def mostrarImagen(self):
+        return 0 # mostrar la imagen
+
+    def biblioteca(self):
+        return 0 # ultimoHacerUnaBibliotecaDeCancionesSubidas
