@@ -1,0 +1,45 @@
+:root {
+    --background-color: #1e1e1e;
+    --background-color-secondary: #2e2e2e;
+}
+
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+    font-size: 14px;
+
+}
+
+body {
+    font-family: monospace;
+    background-color: var(--background-color);
+    margin-bottom: 60px;
+    color: white;
+    margin-top: 70px
+}
+
+.socialBar {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.card {
+    background-color: #f8f9fa;
+    transition: background-color 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    border: 2px solid darkgray;
+}
+
+.card:hover {
+    background-color: #ffffff;
+    transform: translateY(-5px);
+}

@@ -1,0 +1,22 @@
+﻿
+
+
+    .navbar .navbar-toggler {
+        margin-left: auto;
+    }
+
+    .btn-primary {
+        color: #fff;
+        border-color: #1861ac;
+    }
+
+    .navbar-toggler-icon {
+        background-image: url('/resources/navbaricon.png');
+        transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+
+    .navbar-toggler-icon:hover {
+        transform: scale(1.2);
+        filter: invert();
+    }

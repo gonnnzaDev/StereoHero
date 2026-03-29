@@ -1,0 +1,8 @@
+﻿los archivos cs q estan en esta carpeta se genera automaticamente es la MEF 
+(Migration Entity Framework)
+cuando ejecuto los comandos para transformar mis clases q estan en  el contexto
+usando el dotnet
+
+https://learn.microsoft.com/en-us/ef/core/managing-schemas/scaffolding/?tabs=dotnet-core-cli
+
+
