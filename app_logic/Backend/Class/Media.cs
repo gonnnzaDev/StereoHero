@@ -1,6 +1,6 @@
 using Project.app_logic.Backend.Class.Exceptions;
 using System;
-
+using System.Text.RegularExpressions;
 public class Media
 {
 
@@ -14,7 +14,7 @@ public class Media
 
     public Media(string name, string description, double price, string produceBy, string image)
     {
-        if (name == null || price < 0)
+        if (name == null || price < 0 || Regex.IsMatch(name , @"\d") ||Regex.IsMatch(produceBy, @"\d") )
         {
             throw new LogicException("Ocurrio un error");
 
