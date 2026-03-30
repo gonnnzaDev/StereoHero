@@ -37,9 +37,17 @@ body {
     background-color: #f8f9fa;
     transition: background-color 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
     border: 2px solid darkgray;
+     display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .card:hover {
     background-color: #ffffff;
     transform: translateY(-5px);
+}
+
+
+.buyBtn {
+    margin-top: auto;
 }
